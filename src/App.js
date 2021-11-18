@@ -5,7 +5,6 @@ import './App.css';
 import * as api from './services/api';
 
 function App() {
-
   api.getCategories()
     .then((data) => {
       console.log(data);
