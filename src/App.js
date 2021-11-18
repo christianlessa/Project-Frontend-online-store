@@ -1,9 +1,9 @@
 import React from 'react';
-// import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 // importa métodos da api
 import * as api from './services/api';
-import Search from './Components/Search';
+import Routes from './Components/Routes';
 
 function App() {
   api.getCategories()
@@ -15,8 +15,12 @@ function App() {
     });
 
   return (
-    <Search />
-    // botão
+
+    <BrowserRouter>
+      <Routes />
+
+    </BrowserRouter>
+
   );
 }
 

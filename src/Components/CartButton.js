@@ -5,10 +5,13 @@ class CartButton extends React.Component {
   render() {
     return (
       <Link
-        to="*"
+        to="/cart"
         data-testid="shopping-cart-button"
       >
-        Carrinho
+        <img
+          src="../images/cart-icon.png"
+          alt="cart-icon"
+        />
       </Link>
     );
   }
