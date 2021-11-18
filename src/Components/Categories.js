@@ -24,7 +24,12 @@ export default class Categories extends Component {
       <section>
         {categories.map((category) => (
           <div key={ category.id }>
-            <input type="radio" data-testid="category" id={ category.id } />
+            <input
+              type="radio"
+              name="category"
+              data-testid="category"
+              id={ category.id }
+            />
             <label htmlFor={ category.id }>{category.name}</label>
           </div>
         ))}
