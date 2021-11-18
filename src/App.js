@@ -1,8 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// importa métodos da api
+import * as api from './services/api';
 
 function App() {
+
+  api.getCategories()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   return (
     <div className="App">
       <header className="App-header">
