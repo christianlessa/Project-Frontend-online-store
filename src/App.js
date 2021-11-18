@@ -1,12 +1,12 @@
 import React from 'react';
-// import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
-// importa métodos da api
 import * as api from './services/api';
 import Search from './Components/Search';
+import Categories from './Components/Categories';
 
 function App() {
-  api.getCategories()
+  api
+    .getCategories()
     .then((data) => {
       console.log(data);
     })
@@ -15,7 +15,10 @@ function App() {
     });
 
   return (
-    <Search />
+    <>
+      <Search />
+      <Categories />
+    </>
   );
 }
 
