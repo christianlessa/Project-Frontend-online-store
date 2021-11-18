@@ -21,7 +21,7 @@ class Home extends React.Component {
   onChangeHandler({ target }) {
     const { value } = target;
 
-    this.setState({ searchInput: value, })
+    this.setState({ searchInput: value });
   }
 
   async fetchItemList() {
