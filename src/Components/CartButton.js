@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cartIcon from '../images/cart-icon.png';
 
 class CartButton extends React.Component {
   render() {
@@ -9,8 +10,9 @@ class CartButton extends React.Component {
         data-testid="shopping-cart-button"
       >
         <img
-          src="../images/cart-icon.png"
+          src={ cartIcon }
           alt="cart-icon"
+          width="20px"
         />
       </Link>
     );

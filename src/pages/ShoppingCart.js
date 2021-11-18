@@ -4,7 +4,11 @@ class ShoppingCart extends React.Component {
   render() {
     return (
       <div>
-        <p>Component Shopping</p>
+        <p
+          data-testid="shopping-cart-empty-message"
+        >
+          Seu carrinho está vazio
+        </p>
       </div>
     );
   }
