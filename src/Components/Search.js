@@ -6,9 +6,13 @@ class Search extends Component {
       <div>
         <input
           type="text"
-          data-testid="home-initial-message"
         />
-        <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
+        <span
+          data-testid="home-initial-message"
+        >
+          Digite algum termo de pesquisa ou escolha uma categoria.
+
+        </span>
       </div>
 
     );
