@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Search extends Component {
   render() {
+    const { searchInput, onChangeHandler } = this.props;
+
     return (
       <div>
         <input
+          data-testid="query-input"
           type="text"
+          value={ searchInput }
+          onChange={ onChangeHandler }
         />
         <span
           data-testid="home-initial-message"
@@ -18,5 +24,10 @@ class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  searchInput: PropTypes.string.isRequired,
+  onChangeHandler: PropTypes.func.isRequired,
+};
 
 export default Search;
