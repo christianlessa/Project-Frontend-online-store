@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 export default class Categories extends Component {
@@ -19,6 +20,7 @@ export default class Categories extends Component {
 
   render() {
     const { categories } = this.state;
+    const { onRadioClick } = this.props;
 
     return (
       <section>
@@ -29,6 +31,7 @@ export default class Categories extends Component {
               name="category"
               data-testid="category"
               id={ category.id }
+              onClick={ onRadioClick }
             />
             <label htmlFor={ category.id }>{category.name}</label>
           </div>
@@ -37,3 +40,7 @@ export default class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  onRadioClick: PropTypes.func.isRequired,
+};
