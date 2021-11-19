@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import CartButton from '../Components/CartButton';
 import Search from '../Components/Search';
@@ -71,12 +72,18 @@ class Home extends React.Component {
             }
             {
               itemList.map((item) => (
-                <ProductCard
+                <Link
+                  data-testid="product-detail-link"
                   key={ item.id }
-                  price={ item.price }
-                  thumbnail={ item.thumbnail }
-                  title={ item.title }
-                />
+                  to={ `/product/${item.id}` }
+                >
+                  <ProductCard
+                    key={ item.id }
+                    price={ item.price }
+                    thumbnail={ item.thumbnail }
+                    title={ item.title }
+                  />
+                </Link>
               ))
             }
           </main>
