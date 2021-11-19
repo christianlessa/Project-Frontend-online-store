@@ -5,15 +5,56 @@ import ShoppingCart from '../pages/ShoppingCart';
 import ProductDetails from '../pages/ProductDetails';
 
 class Routes extends React.Component {
+  constructor() {
+    super();
+
+    this.addToCart = this.addToCart.bind(this);
+
+    this.state = {
+      cart: [],
+    };
+  }
+
+  addToCart(id) {
+    this.setState((prev) => ({
+      cart: [...prev.cart, id],
+    }));
+  }
+
   render() {
+    const { cart } = this.state;
     return (
       <Switch>
-        <Route exact path="/" component={ Home } />
-        <Route exact path="/cart" component={ ShoppingCart } />
+        <Route
+          exact
+          path="/"
+          render={ () => (
+            <Home
+              cart={ cart }
+              addToCart={ this.addToCart }
+            />
+          ) }
+        />
+        <Route
+          exact
+          path="/cart"
+          render={ () => (
+            <ShoppingCart
+              cart={ cart }
+              addToCart={ this.addToCart }
+            />
+          ) }
+        />
         <Route
           exact
           path="/product/:id"
-          render={ (props) => <ProductDetails { ...props } /> }
+          render={ (props) => (
+            <ProductDetails
+              addToCart={ this.addToCart }
+              cart={ cart }
+              { ...props }
+            />
+          ) }
         />
       </Switch>
     );

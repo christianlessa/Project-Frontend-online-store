@@ -4,6 +4,7 @@ import cartIcon from '../images/cart-icon.png';
 
 class CartButton extends React.Component {
   render() {
+    const { cart } = this.props;
     return (
       <section className="cart-button-container">
         <Link
@@ -15,6 +16,11 @@ class CartButton extends React.Component {
             alt="cart-icon"
             width="30px"
           />
+          <span
+            data-testid="shopping-cart-product-quantity"
+          >
+            { cart.length }
+          </span>
         </Link>
       </section>
     );

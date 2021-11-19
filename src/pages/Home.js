@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import CartButton from '../Components/CartButton';
 import Search from '../Components/Search';
@@ -58,6 +58,7 @@ class Home extends React.Component {
 
   render() {
     const { itemList, searchInput } = this.state;
+    const { addToCart, cart } = this.props;
 
     return (
       <div className="home-container">
@@ -73,7 +74,7 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <CartButton id="cart-button" />
+          <CartButton id="cart-button" cart={ cart } />
         </div>
         <div className="categores-products-container">
           <aside className="categories-container">
@@ -92,18 +93,14 @@ class Home extends React.Component {
             }
             {
               itemList.map((item) => (
-                <Link
-                  data-testid="product-detail-link"
+                <ProductCard
                   key={ item.id }
-                  to={ `/product/${item.id}` }
-                >
-                  <ProductCard
-                    key={ item.id }
-                    price={ item.price }
-                    thumbnail={ item.thumbnail }
-                    title={ item.title }
-                  />
-                </Link>
+                  price={ item.price }
+                  thumbnail={ item.thumbnail }
+                  title={ item.title }
+                  id={ item.id }
+                  addToCart={ addToCart }
+                />
               ))
             }
           </main>
@@ -112,5 +109,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;
