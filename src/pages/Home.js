@@ -11,11 +11,22 @@ class Home extends React.Component {
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.fetchItemList = this.fetchItemList.bind(this);
+    this.onRadioClick = this.onRadioClick.bind(this);
+    this.fetchProductsFromCategory = this.fetchProductsFromCategory.bind(this);
 
     this.state = {
       itemList: [],
       searchInput: '',
+      category: '',
     };
+  }
+
+  onRadioClick({ target }) {
+    const { id } = target;
+
+    this.setState({ category: id });
+
+    this.fetchProductsFromCategory();
   }
 
   onChangeHandler({ target }) {
@@ -24,12 +35,21 @@ class Home extends React.Component {
     this.setState({ searchInput: value });
   }
 
+  async fetchProductsFromCategory() {
+    const { category } = this.state;
+
+    const response = await api.getProductsFromCategory(category);
+
+    this.setState({
+      itemList: response.results,
+    });
+  }
+
   async fetchItemList() {
-    const { searchInput } = this.state;
+    const { searchInput, category } = this.state;
 
-    const response = await api.getProductsFromCategoryAndQuery('', searchInput);
+    const response = await api.getProductsFromCategoryAndQuery(category, searchInput);
 
-    console.log(response.results[0]);
     this.setState({
       itemList: response.results,
     });
@@ -56,7 +76,7 @@ class Home extends React.Component {
         </div>
         <div className="categores-products-container">
           <aside className="categories-container">
-            <Categories />
+            <Categories onRadioClick={ this.onRadioClick }/>
           </aside>
           <main className="products-container">
             {
