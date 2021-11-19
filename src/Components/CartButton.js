@@ -5,16 +5,18 @@ import cartIcon from '../images/cart-icon.png';
 class CartButton extends React.Component {
   render() {
     return (
-      <Link
-        to="/cart"
-        data-testid="shopping-cart-button"
-      >
-        <img
-          src={ cartIcon }
-          alt="cart-icon"
-          width="20px"
-        />
-      </Link>
+      <section className="cart-button-container">
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          <img
+            src={ cartIcon }
+            alt="cart-icon"
+            width="30px"
+          />
+        </Link>
+      </section>
     );
   }
 }

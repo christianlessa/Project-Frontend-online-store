@@ -13,12 +13,6 @@ class Search extends Component {
           value={ searchInput }
           onChange={ onChangeHandler }
         />
-        <span
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-
-        </span>
       </div>
 
     );
