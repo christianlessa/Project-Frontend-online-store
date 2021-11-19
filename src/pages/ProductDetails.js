@@ -26,8 +26,6 @@ class ProductDetails extends Component {
 
     const response = await api.getProductfromId(id);
 
-    console.log(response);
-
     this.setState({
       name: response.title,
       thumbnail: response.thumbnail,
@@ -37,8 +35,6 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { match } = this.props;
-    const { id } = match.params;
     const {
       name,
       thumbnail,
