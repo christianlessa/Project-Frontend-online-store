@@ -39,31 +39,47 @@ class Home extends React.Component {
     const { itemList, searchInput } = this.state;
 
     return (
-      <div>
-        <Search
-          searchInput={ searchInput }
-          onChangeHandler={ this.onChangeHandler }
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ this.fetchItemList }
-        >
-          Pesquisar
-        </button>
-        <CartButton />
-        <Categories />
-        <div>
-          {
-            itemList.map((item) => (
-              <ProductCard
-                key={ item.id }
-                price={ item.price }
-                thumbnail={ item.thumbnail }
-                title={ item.title }
-              />
-            ))
-          }
+      <div className="home-container">
+        <div className="search-bar-container">
+          <Search
+            searchInput={ searchInput }
+            onChangeHandler={ this.onChangeHandler }
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.fetchItemList }
+          >
+            Pesquisar
+          </button>
+          <CartButton id="cart-button" />
+        </div>
+        <div className="categores-products-container">
+          <aside className="categories-container">
+            <Categories />
+          </aside>
+          <main className="products-container">
+            {
+              !searchInput ? (
+                <span
+                  data-testid="home-initial-message"
+                >
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+
+                </span>
+              ) : null
+            }
+            {
+              itemList.map((item) => (
+                <ProductCard
+                  key={ item.id }
+                  price={ item.price }
+                  thumbnail={ item.thumbnail }
+                  title={ item.title }
+                />
+              ))
+            }
+          </main>
         </div>
       </div>
     );
