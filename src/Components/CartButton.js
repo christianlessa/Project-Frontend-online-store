@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cartIcon from '../images/cart-icon.png';
 
@@ -16,15 +17,15 @@ class CartButton extends React.Component {
             alt="cart-icon"
             width="30px"
           />
-          <span
-            data-testid="shopping-cart-product-quantity"
-          >
-            { cart.length }
-          </span>
+          <span>{ cart.length }</span>
         </Link>
       </section>
     );
   }
 }
+
+CartButton.propTypes = {
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default CartButton;

@@ -112,6 +112,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Home;
