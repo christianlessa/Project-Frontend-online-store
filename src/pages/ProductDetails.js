@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import CartButton from '../Components/CartButton';
 
 class ProductDetails extends Component {
   constructor() {
@@ -41,9 +42,12 @@ class ProductDetails extends Component {
       price,
       specifications,
     } = this.state;
+    const { match, addToCart, cart } = this.props;
+    const { id } = match.params;
 
     return (
       <div>
+        <CartButton cart={ cart } />
         <div>
           <h1 data-testid="product-detail-name">{ name }</h1>
           <span>{ `- R$ ${price}` }</span>
@@ -62,6 +66,15 @@ class ProductDetails extends Component {
             </ul>
           </div>
         </div>
+        <div>
+          <button
+            type="button"
+            onClick={ () => addToCart(id) }
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     );
   }
@@ -73,6 +86,8 @@ ProductDetails.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  addToCart: PropTypes.func.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ProductDetails;

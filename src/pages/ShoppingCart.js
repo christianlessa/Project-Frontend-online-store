@@ -16,7 +16,7 @@ class ShoppingCart extends React.Component {
               <span
                 data-testid="shopping-cart-product-quantity"
               >
-                { `x${item.quantity}` }
+                { ` x${item.quantity}` }
               </span>
             </li>))
         }
