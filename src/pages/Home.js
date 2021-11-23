@@ -25,9 +25,7 @@ class Home extends React.Component {
   onRadioClick({ target }) {
     const { id } = target;
 
-    this.setState({ category: id });
-
-    this.fetchProductsFromCategory();
+    this.setState({ category: id }, () => this.fetchProductsFromCategory());
   }
 
   onChangeHandler({ target }) {
@@ -40,7 +38,6 @@ class Home extends React.Component {
     const { category } = this.state;
 
     const response = await api.getProductsFromCategory(category);
-
     this.setState({
       itemList: response.results,
     });
@@ -57,9 +54,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { itemList, searchInput } = this.state;
+    const { itemList, searchInput, category } = this.state;
     const { addToCart, cart } = this.props;
-
+    const searchSomething = !(category || searchInput);
     return (
       <div className="home-container">
         <div className="search-bar-container">
@@ -82,7 +79,7 @@ class Home extends React.Component {
           </aside>
           <main className="products-container">
             {
-              !searchInput ? (
+              searchSomething ? (
                 <span
                   data-testid="home-initial-message"
                 >
@@ -99,7 +96,7 @@ class Home extends React.Component {
                   thumbnail={ item.thumbnail }
                   title={ item.title }
                   id={ item.id }
-                  addToCart={ addToCart }
+                  addToCart={ () => addToCart(item) }
                 />
               ))
             }

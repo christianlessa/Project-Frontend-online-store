@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import ShoppingCart from '../pages/ShoppingCart';
-import * as api from '../services/api';
 import ProductDetails from '../pages/ProductDetails';
 
 class Routes extends React.Component {
@@ -10,29 +9,57 @@ class Routes extends React.Component {
     super();
 
     this.addToCart = this.addToCart.bind(this);
+    this.manipulateCart = this.manipulateCart.bind(this);
 
     this.state = {
       cart: [],
     };
   }
 
-  async addToCart(id) {
+  manipulateCart(operation, id) {
     const { cart } = this.state;
-    const response = await api.getProductfromId(id);
-    const alreadyOnCart = cart.some((cartItem) => cartItem.product.id === response.id);
+    switch (operation) {
+    case '+':
+      cart.find((cartItem) => cartItem.product.id === id).quantity += 1;
+      break;
+    case '-':
+      cart.find((cartItem) => cartItem.product.id === id).quantity -= 1;
+      break;
+    case 'x':
+      this.setState({ cart: cart.filter((cartItem) => cartItem.product.id !== id) });
+      break;
+    default:
+      break;
+    }
+    this.setState({ cart });
+  }
 
-    if (alreadyOnCart) {
-      cart.find((cartItem) => cartItem.product.id === response.id).quantity += 1;
-    } else {
+  addToCart(item) {
+    const { cart } = this.state;
+
+    this.setState((prev) => {
+      const alreadyOnCart = cart
+        .some((cartItem) => cartItem.product.id === item.id);
+
+      if (alreadyOnCart) {
+        const product = cart.map((cartItem) => {
+          if (cartItem.product.id === item.id) {
+            const sum = cartItem;
+            sum.quantity += 1;
+            return sum;
+          }
+          return cartItem;
+        });
+        return { cart: [...product] };
+      }
+
       const product = {
-        product: response,
+        product: item,
         quantity: 1,
       };
 
-      this.setState((prev) => ({
-        cart: [...prev.cart, product],
-      }));
-    }
+      return { cart: [...prev.cart, product] };
+    });
   }
 
   render() {
@@ -55,6 +82,7 @@ class Routes extends React.Component {
           render={ () => (
             <ShoppingCart
               cart={ cart }
+              manipulateCart={ this.manipulateCart }
               addToCart={ this.addToCart }
             />
           ) }
