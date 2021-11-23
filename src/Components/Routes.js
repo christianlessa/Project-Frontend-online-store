@@ -59,7 +59,6 @@ class Routes extends React.Component {
 
       this.setState((prev) => ({ cart: [...prev.cart, product] }));
     }
-
   }
 
   render() {
