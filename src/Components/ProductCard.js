@@ -25,9 +25,9 @@ class ProductCard extends Component {
           </div>
         </Link>
         <button
-          type="button"
-          onClick={ () => addToCart(id) }
           data-testid="product-add-to-cart"
+          type="button"
+          onClick={ addToCart }
         >
           Adicionar ao Carrinho
         </button>

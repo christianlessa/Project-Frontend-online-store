@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class ShoppingCart extends React.Component {
   render() {
-    const { cart } = this.props;
+    const { cart, manipulateCart } = this.props;
     return (
       <div>
         {
@@ -12,22 +12,48 @@ class ShoppingCart extends React.Component {
               Seu carrinho está vazio
             </span>
           ) : (
-            <ol>
+            <div>
               {
                 cart.map((item) => (
-                  <li
+                  <div
                     key={ item.product.id }
-                    data-testid="shopping-cart-product-name"
                   >
-                    { item.product.title }
+                    <span data-testid="shopping-cart-product-name">
+                      { item.product.title }
+                    </span>
+
                     <span
                       data-testid="shopping-cart-product-quantity"
                     >
                       { ` x${item.quantity}` }
                     </span>
-                  </li>))
+
+                    <button
+                      data-testid="product-increase-quantity"
+                      type="button"
+                      onClick={ () => manipulateCart('+', item.product.id) }
+                    >
+                      +
+                    </button>
+
+                    <button
+                      data-testid="product-decrease-quantity"
+                      type="button"
+                      onClick={ () => manipulateCart('-', item.product.id) }
+                    >
+                      -
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={ () => manipulateCart('x', item.product.id) }
+                    >
+                      x
+                    </button>
+
+                  </div>))
               }
-            </ol>
+            </div>
           )
         }
       </div>
@@ -37,6 +63,7 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  manipulateCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
