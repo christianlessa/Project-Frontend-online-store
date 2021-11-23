@@ -17,7 +17,7 @@ class CartButton extends React.Component {
             alt="cart-icon"
             width="30px"
           />
-          <span>{ cart.length }</span>
+          <span>{ cart.reduce((acc, curr) => (curr.quantity + acc), 0)}</span>
         </Link>
       </section>
     );

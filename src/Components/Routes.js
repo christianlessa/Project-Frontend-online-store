@@ -37,6 +37,7 @@ class Routes extends React.Component {
 
   addToCart(item) {
     const { cart } = this.state;
+    console.log('chamado');
 
     this.setState((prev) => {
       const alreadyOnCart = cart
@@ -45,12 +46,12 @@ class Routes extends React.Component {
       if (alreadyOnCart) {
         const product = cart.map((cartItem) => {
           if (cartItem.product.id === item.id) {
-            const sum = cartItem;
-            sum.quantity += 1;
-            return sum;
+            console.log(cartItem);
+            return cartItem;
           }
           return cartItem;
         });
+        console.log(product);
         return { cart: [...product] };
       }
 

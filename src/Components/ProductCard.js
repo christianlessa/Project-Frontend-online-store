@@ -10,8 +10,9 @@ class ProductCard extends Component {
       title,
       id,
       addToCart,
+      item,
+      freeShipping,
     } = this.props;
-
     return (
       <div data-testid="product" className="product-card">
         <Link
@@ -23,11 +24,20 @@ class ProductCard extends Component {
             <img src={ thumbnail } alt={ title } width="100px" />
             <p>{ price }</p>
           </div>
+          <div>
+            <span>
+              {
+                freeShipping ? (
+                  <span data-testid="free-shipping">Frete Grátis</span>
+                ) : null
+              }
+            </span>
+          </div>
         </Link>
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ addToCart }
+          onClick={ () => addToCart(item) }
         >
           Adicionar ao Carrinho
         </button>
@@ -42,6 +52,10 @@ ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  item: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
 
 export default ProductCard;
