@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import ShoppingCart from '../pages/ShoppingCart';
 import ProductDetails from '../pages/ProductDetails';
+import Checkout from '../pages/Checkout';
 
 class Routes extends React.Component {
   constructor() {
@@ -94,6 +95,15 @@ class Routes extends React.Component {
               addToCart={ this.addToCart }
               cart={ cart }
               { ...props }
+            />
+          ) }
+        />
+        <Route
+          exact
+          path="/checkout"
+          render={ () => (
+            <Checkout
+              cart={ cart }
             />
           ) }
         />
