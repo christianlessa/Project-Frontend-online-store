@@ -44,6 +44,7 @@ class ProductDetails extends Component {
       price,
       specifications,
     } = this.state;
+    const { addToCart, cart } = this.props;
     const { item } = this.state;
 
     return (
