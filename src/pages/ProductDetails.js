@@ -16,6 +16,7 @@ class ProductDetails extends Component {
       price: undefined,
       specifications: [],
       item: {},
+      freeShipping: false,
     };
   }
 
@@ -35,6 +36,7 @@ class ProductDetails extends Component {
       price: response.price.toFixed(2),
       specifications: response.attributes,
       item: response,
+      freeShipping: response.shipping.free_shipping,
     });
   }
 
@@ -44,6 +46,7 @@ class ProductDetails extends Component {
       thumbnail,
       price,
       specifications,
+      freeShipping,
     } = this.state;
     const { addToCart, cart } = this.props;
     const { item } = this.state;
@@ -54,6 +57,13 @@ class ProductDetails extends Component {
         <div>
           <h1 data-testid="product-detail-name">{ name }</h1>
           <span>{ `- R$ ${price}` }</span>
+        </div>
+        <div>
+          <span>
+            {
+              freeShipping ? <span data-testid="free-shipping">Frete Grátis</span> : null
+            }
+          </span>
         </div>
         <div>
           <img src={ thumbnail } alt={ name } />

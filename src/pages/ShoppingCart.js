@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends React.Component {
   render() {
@@ -30,6 +31,7 @@ class ShoppingCart extends React.Component {
 
                     <button
                       data-testid="product-increase-quantity"
+                      disabled={ item.quantity === item.product.available_quantity }
                       type="button"
                       onClick={ () => manipulateCart('+', item.product.id) }
                     >
@@ -44,15 +46,14 @@ class ShoppingCart extends React.Component {
                       -
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={ () => manipulateCart('x', item.product.id) }
-                    >
-                      x
-                    </button>
-
                   </div>))
               }
+              <Link
+                data-testid="checkout-products"
+                to="/checkout"
+              >
+                Checkout
+              </Link>
             </div>
           )
         }

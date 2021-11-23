@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import ShoppingCart from '../pages/ShoppingCart';
 import ProductDetails from '../pages/ProductDetails';
+import Checkout from '../pages/Checkout';
 
 class Routes extends React.Component {
   constructor() {
@@ -37,29 +38,27 @@ class Routes extends React.Component {
   addToCart(item) {
     const { cart } = this.state;
 
-    this.setState((prev) => {
-      const alreadyOnCart = cart
-        .some((cartItem) => cartItem.product.id === item.id);
+    const alreadyOnCart = cart
+      .some((cartItem) => cartItem.product.id === item.id);
 
-      if (alreadyOnCart) {
-        const product = cart.map((cartItem) => {
-          if (cartItem.product.id === item.id) {
-            const sum = cartItem;
-            sum.quantity += 1;
-            return sum;
-          }
-          return cartItem;
-        });
-        return { cart: [...product] };
-      }
-
+    if (alreadyOnCart) {
+      const product = cart.map((cartItem) => {
+        if (cartItem.product.id === item.id) {
+          const sum = cartItem;
+          sum.quantity += 1;
+          return sum;
+        }
+        return cartItem;
+      });
+      this.setState({ cart: [...product] });
+    } else {
       const product = {
         product: item,
         quantity: 1,
       };
 
-      return { cart: [...prev.cart, product] };
-    });
+      this.setState((prev) => ({ cart: [...prev.cart, product] }));
+    }
   }
 
   render() {
@@ -94,6 +93,15 @@ class Routes extends React.Component {
               addToCart={ this.addToCart }
               cart={ cart }
               { ...props }
+            />
+          ) }
+        />
+        <Route
+          exact
+          path="/checkout"
+          render={ () => (
+            <Checkout
+              cart={ cart }
             />
           ) }
         />
