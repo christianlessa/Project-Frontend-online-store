@@ -83,7 +83,6 @@ class Routes extends React.Component {
             <ShoppingCart
               cart={ cart }
               manipulateCart={ this.manipulateCart }
-              addToCart={ this.addToCart }
             />
           ) }
         />

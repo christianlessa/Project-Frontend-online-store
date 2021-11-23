@@ -14,6 +14,7 @@ class ProductDetails extends Component {
       thumbnail: '',
       price: undefined,
       specifications: [],
+      item: {},
     };
   }
 
@@ -32,6 +33,7 @@ class ProductDetails extends Component {
       thumbnail: response.thumbnail,
       price: response.price.toFixed(2),
       specifications: response.attributes,
+      item: response,
     });
   }
 
@@ -44,6 +46,7 @@ class ProductDetails extends Component {
     } = this.state;
     const { match, addToCart, cart } = this.props;
     const { id } = match.params;
+    const { item } = this.state;
 
     return (
       <div>
@@ -69,7 +72,7 @@ class ProductDetails extends Component {
         <div>
           <button
             type="button"
-            onClick={ () => addToCart(id) }
+            onClick={ () => addToCart(item) }
             data-testid="product-detail-add-to-cart"
           >
             Adicionar ao Carrinho
