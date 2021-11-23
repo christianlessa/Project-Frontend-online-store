@@ -37,31 +37,29 @@ class Routes extends React.Component {
 
   addToCart(item) {
     const { cart } = this.state;
-    console.log('chamado');
 
-    this.setState((prev) => {
-      const alreadyOnCart = cart
-        .some((cartItem) => cartItem.product.id === item.id);
+    const alreadyOnCart = cart
+      .some((cartItem) => cartItem.product.id === item.id);
 
-      if (alreadyOnCart) {
-        const product = cart.map((cartItem) => {
-          if (cartItem.product.id === item.id) {
-            console.log(cartItem);
-            return cartItem;
-          }
-          return cartItem;
-        });
-        console.log(product);
-        return { cart: [...product] };
-      }
-
+    if (alreadyOnCart) {
+      const product = cart.map((cartItem) => {
+        if (cartItem.product.id === item.id) {
+          const sum = cartItem;
+          sum.quantity += 1;
+          return sum;
+        }
+        return cartItem;
+      });
+      this.setState({ cart: [...product] });
+    } else {
       const product = {
         product: item,
         quantity: 1,
       };
 
-      return { cart: [...prev.cart, product] };
-    });
+      this.setState((prev) => ({ cart: [...prev.cart, product] }));
+    }
+
   }
 
   render() {
